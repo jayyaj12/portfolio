@@ -1,3 +1,6 @@
 title: Portfolio
 theme: minima
 markdown: kramdown
+
+include:
+  - assets
