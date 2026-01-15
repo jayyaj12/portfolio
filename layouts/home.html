@@ -1,0 +1,94 @@
+---
+layout: default
+---
+
+{% include header.html %}
+
+<main class="container">
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>안녕하세요, Android 엔지니어 황중현입니다.</h1>
+    <p class="hero-sub">
+      안정적인 IoT 디바이스 연결과 유지보수 가능한 아키텍처를 설계합니다.
+    </p>
+    <div class="tags">
+      <span class="tag">Android</span>
+      <span class="tag">Kotlin</span>
+      <span class="tag">IoT / BLE</span>
+      <span class="tag">Clean Architecture</span>
+      <span class="tag">CI/CD</span>
+    </div>
+  </section>
+
+  <!-- What I Do -->
+  <section class="what-i-do">
+    <h2>What I Do</h2>
+    <div class="value-grid">
+      <div class="value-card">
+        <img class="value-icon" src="{{ '/assets/icons/bluetooth.svg' | relative_url }}" alt="Bluetooth" />
+        <h3>Bluetooth / Device Control</h3>
+        <p>
+          BLE, Serial 통신을 통해 상용 디바이스를 안정적으로 연결하고
+          실시간 데이터를 처리합니다.
+        </p>
+      </div>
+      <div class="value-card">
+        <img class="value-icon" src="{{ '/assets/icons/layers.svg' | relative_url }}" alt="Architecture" />
+        <h3>Sustainable Architecture</h3>
+        <p>
+          레거시 Java 코드를 Kotlin 기반 MVI/MVVM 구조로 재설계하여
+          유지보수성과 확장성을 개선합니다.
+        </p>
+      </div>
+      <div class="value-card">
+        <img class="value-icon" src="{{ '/assets/icons/server' | relative_url }}" alt="CI/CD" />
+        <h3>Productivity & Automation</h3>
+        <p>
+          멀티모듈 전략과 CI/CD 파이프라인을 구축해
+          빌드·배포 효율과 품질을 동시에 확보합니다.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Highlights -->
+  <section class="highlights">
+    <div class="metric-card">
+      <strong>150+</strong>
+      <span>상용 디바이스 운영</span>
+    </div>
+    <div class="metric-card">
+      <strong>78% ↓</strong>
+      <span>빌드 시간 단축</span>
+    </div>
+    <div class="metric-card">
+      <strong>99.9%</strong>
+      <span>핵심 기능 크래시 방어율</span>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section class="projects-section">
+    <h2>Projects</h2>
+    <div class="project-grid">
+      {% for project in site.projects %}
+      <div class="project-card">
+        <h3>{{ project.title }}</h3>
+        <p class="project-summary">{{ project.summary }}</p>
+        <div class="tech-tags">
+          {% for tech in project.tech_stack %}
+          <span class="tag">{{ tech }}</span>
+          {% endfor %}
+        </div>
+        <a href="{{ project.url }}" class="read-more-link">
+          Read Case Study →
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+</main>
+
+{% include footer.html %}
