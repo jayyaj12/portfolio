@@ -1,21 +1,25 @@
-/* ===== Global ===== */
+---
+---
+
+@import "minima";
+
+/* ===== Custom white/blue tone ===== */
 body {
   background-color: #ffffff;
-  color: #1f2937; /* 진한 회색 */
+  color: #1f2937;
   font-size: 16px;
   line-height: 1.65;
 }
 
-/* ===== Header ===== */
 .site-header {
-  border-top: 3px solid #2563eb; /* Blue-600 */
+  border-top: 3px solid #2563eb;
   border-bottom: 1px solid #e5e7eb;
   background-color: #ffffff;
 }
 
 .site-title,
 .site-title:visited {
-  color: #1e3a8a; /* Blue-800 */
+  color: #1e3a8a;
   font-weight: 700;
 }
 
@@ -28,7 +32,6 @@ body {
   color: #2563eb;
 }
 
-/* ===== Headings ===== */
 h1, h2, h3 {
   color: #111827;
   font-weight: 700;
@@ -40,7 +43,6 @@ h2 {
   margin-top: 2.5em;
 }
 
-/* ===== Links ===== */
 a {
   color: #2563eb;
   text-decoration: none;
@@ -50,17 +52,14 @@ a:hover {
   text-decoration: underline;
 }
 
-/* ===== Lists ===== */
 ul li {
   margin-bottom: 0.4em;
 }
 
-/* ===== Highlight blocks ===== */
 strong {
   color: #1e40af;
 }
 
-/* ===== Footer ===== */
 .site-footer {
   border-top: 1px solid #e5e7eb;
   background-color: #f9fafb;
