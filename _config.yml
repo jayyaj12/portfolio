@@ -1,8 +1,8 @@
 title: Portfolio
-theme: minima
-markdown: kramdown
+description: Android case studies
+url: "https://jayyaj12.github.io"
+baseurl: "/portfolio"
 
-collections:
-  projects:
-    output: true
-    permalink: /projects/:name/
+sass:
+  sass_dir: assets
+  style: compressed
