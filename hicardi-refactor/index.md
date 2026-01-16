@@ -1,7 +1,7 @@
 ---
 layout: project
 title: "Hicardi Android 앱 레거시 리팩토링 및 아키텍처 고도화"
-subtitle: "레거시 Java 기반 Android 앱을 Kotlin · MVI/Clean Architecture · 멀티모듈로 재설계하고, build-logic/CI·CD로 빌드·배포 시간을 정량 개선한 사례"
+subtitle: "레거시 Java 기반 Android 앱을 Kotlin · MVI/Clean Architecture · 멀티모듈로 재설계하고, build-logic/CI·CD로 배포 프로세스를 자동화하고 테스트 환경을 구축한 사례"
 period: "2025.09 – 2025.12"
 role: "Android Developer"
 featured: true
@@ -15,8 +15,8 @@ tags:
   - Gradle(KTS)
   - GitHub Actions
   - JUnit5
+  - JaCoCo
 metrics:
-  - { value: "78%", label: "빌드 시간 단축" }
   - { value: "66%", label: "배포 소요 시간 감소" }
   - { value: "60%", label: "테스트 커버리지" }
 ---
@@ -39,15 +39,15 @@ metrics:
 ### A. Architecture: MVI + Clean Architecture
 - **Unidirectional Data Flow (UDF)**:
   - **How**: 사용자의 의도(Intent)를 `Sealed Interface`로 정의하고, Reducer를 통해 불변 상태(Immutable State)만 UI로 발행
-  - **Why**: 의료 데이터 특성상 UI와 실제 데이터의 불일치가 치명적이므로, 상태 변경의 원천(Source of Truth)을 하나로 통제하여 사이드 이펙트를 차단
+  - **Why**: MVVM의 가변 상태(Mutable State)는 동시성 처리에 취약하여 데이터 불일치 위험이 있음. 이에 MVI를 도입하여 불변 데이터(Immutable Data)로 상태를 관리하고, 변경 로직을 순차적으로 처리하여 스레드 안전성(Thread Safety)을 확보함
 
 - **UseCase Separation**:
   - **How**: 비즈니스 로직을 ViewModel에서 분리하여 순수 Kotlin 모듈(Domain Layer)로 격리, 안드로이드 의존성 제거
 
 ### B. Modularization & Build Logic
 - **Multi-module Strategy**:
-  - **How**: Google의 'Now in Android' 아키텍처를 참고하여 `app` → `feature` → `core`의 3단계 계층 구조로 재편. 기능 단위는 `feature` 모듈로, 공통 비즈니스 로직과 데이터 모델은 `core` 모듈로 분리하여 응집도를 높임
-  - **Why**: 기능별 격리를 통해 코드 결합도를 낮추고, 변경된 모듈만 빌드하는 증분 빌드(Incremental Build) 환경을 구축하여 생산성 극대화
+  - **How**: Google의 공식 레퍼런스인 'Now in Android' 아키텍처를 벤치마킹하여 `app` → `feature` → `core`의 3단계 계층 구조로 재편. 기능 단위는 `feature` 모듈로, 공통 비즈니스 로직과 데이터 모델은 `core` 모듈로 분리하여 응집도를 높임
+  - **Why**: Google이 제시하는 검증된 모듈화 표준을 도입하여 아키텍처의 지속 가능성을 확보하고, 기능별 격리를 통해 증분 빌드(Incremental Build) 효율을 극대화하기 위함
 
 <div class="mermaid">
 graph TD
@@ -69,8 +69,8 @@ graph TD
 
 ### C. CI·CD: GitHub Actions
 - **Pipeline Optimization**:
-  - **How**: `Gradle Build Cache` 및 `Docker Layer Caching`을 적용하여 중복되는 빌드 작업을 생략하도록 파이프라인 최적화
-  - **Why**: 배포 시간을 30분에서 10분으로 단축시킴으로써 QA 피드백 주기를 일 1회에서 4회 이상으로 증대 (Business Agility 확보)
+  - **How**: `Gradle Build Cache` 및 `Dependency Caching`을 적용하여 중복되는 빌드 작업을 생략하도록 파이프라인 최적화
+  - **Why**: 기존 30분이 소요되던 수동 배포 작업을 자동화하여, Git Push 후 10분 내에 배포가 완료되도록 개선하고 인적 개입(Human Intervention)을 제거
 
 <div class="mermaid">
 flowchart LR
@@ -93,23 +93,18 @@ flowchart LR
 ---
 
 ## 4. Key Results
-- **빌드 시간 78% 단축** (약 7m → 1.5m)
 - **배포 소요 시간 66% 감소** (약 30m → 10m)
-- **JUnit 기반 테스트 커버리지 60% 달성**
+- **JUnit5 & JaCoCo 기반 테스트 커버리지 60% 달성**
 - 리팩토링 후 기능 추가 시 변경 영향 범위를 명확히 예측 가능하도록 구조 개선 및 배포 자동화 달성
 
 ---
 
 ## 5. Evidence & Benchmarks
-면접관님께 신뢰도 높은 데이터를 제공하기 위해 **Gradle Build Scan**과 **CI 로그**를 기반으로 측정한 상세 지표입니다.
+면접관님께 신뢰도 높은 데이터를 제공하기 위해 측정한 **테스트 커버리지 리포트**입니다.
 
-| 측정 항목 (Metric) | Legacy (Monolithic) | Refactored (Multi-module) | 개선율 |
-| :--- | :--- | :--- | :--- |
-| **Clean Build** | 평균 7분 20초 | **평균 1분 35초** | ▼ 78% |
-| **Incremental Build** | 평균 45초 | **평균 8초** | ▼ 82% |
-| **CI Pipeline** | 30분 (Test 생략 포함) | **10분 (Test 전체 수행)** | ▼ 66% |
+![Test Coverage Report](./테스트%20커버리지.png)
 
-> **Note**: Incremental Build는 `configuration-cache`가 적용된 상태에서 단일 모듈 수정 시의 측정값입니다.
+> **Analysis**: 핵심 도메인 로직(Domain Layer)을 중심으로 **60%의 커버리지**를 달성하였으며, 이를 통해 리팩토링 과정에서 발생할 수 있는 사이드 이펙트를 사전에 방지하고 안정성을 확보했습니다.
 
 ---
 
