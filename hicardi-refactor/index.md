@@ -1,9 +1,9 @@
 ---
 layout: project
-title: "Hicardi Refactor"
+title: "Hicardi Android 앱 레거시 리팩토링 및 아키텍처 고도화"
 subtitle: "레거시 Java 기반 Android 앱을 Kotlin · MVI/Clean Architecture · 멀티모듈로 재설계하고, build-logic/CI·CD로 빌드·배포 시간을 정량 개선한 사례"
 period: "2025.09 – 2025.12"
-role: "Android Developer (Refactor / Build & CI·CD Owner)"
+role: "Android Developer"
 featured: true
 tags:
   - Android
@@ -52,27 +52,16 @@ metrics:
 
 <div class="mermaid">
 graph TD
-    subgraph App Layer
-      app[":app"]
-    end
-    subgraph Feature Layer
-      home[":feature:home"]
-      setting[":feature:setting"]
-    end
-    subgraph Domain Layer
-      domain[":domain"]
-    end
-    subgraph Core Layer
-      core[":core"]
-    end
+    app[":app"]
+    feature[":feature"]
+    core[":core"]
 
-    app --> home
-    app --> setting
-    home --> domain
-    setting --> domain
-    home --> core
-    setting --> core
-    domain --> core
+    app --> feature
+    feature --> core
+    
+    style app fill:#dbeafe,stroke:#2563eb,stroke-width:2px
+    style feature fill:#d1fae5,stroke:#059669,stroke-width:2px
+    style core fill:#f3f4f6,stroke:#4b5563,stroke-width:2px
 </div>
 
 - **Convention Plugins (build-logic)**:
