@@ -18,7 +18,7 @@ tags:
   - JaCoCo
 metrics:
   - { value: "66%", label: "배포 소요 시간 감소" }
-  - { value: "60%", label: "테스트 커버리지" }
+  - { value: "59%", label: "테스트 커버리지" }
 ---
 
 ## 1. Project Overview
@@ -39,7 +39,7 @@ metrics:
 ### A. Architecture: MVI + Clean Architecture
 - **Unidirectional Data Flow (UDF)**:
   - **How**: 사용자의 의도(Intent)를 `Sealed Interface`로 정의하고, Reducer를 통해 불변 상태(Immutable State)만 UI로 발행
-  - **Why**: MVVM의 가변 상태(Mutable State)는 동시성 처리에 취약하여 데이터 불일치 위험이 있음. 이에 MVI를 도입하여 불변 데이터(Immutable Data)로 상태를 관리하고, 변경 로직을 순차적으로 처리하여 스레드 안전성(Thread Safety)을 확보함
+  - **Why**: MVVM의 가변 상태(Mutable State)는 동시성 처리에 취약하여 데이터 불일치 위험 존재. 이에 MVI를 도입하여 불변 데이터(Immutable Data)로 상태를 관리하고, 변경 로직을 순차적으로 처리하여 스레드 안전성(Thread Safety) 확보
 
 - **UseCase Separation**:
   - **How**: 비즈니스 로직을 ViewModel에서 분리하여 순수 Kotlin 모듈(Domain Layer)로 격리, 안드로이드 의존성 제거
@@ -80,7 +80,7 @@ flowchart LR
 
 ## 4. Key Results
 - **배포 소요 시간 66% 감소** (약 30m → 10m)
-- **JUnit5 & JaCoCo 기반 테스트 커버리지 60% 달성**
+- **JUnit5 & JaCoCo 기반 테스트 커버리지 59% 달성**
 - 리팩토링 후 기능 추가 시 변경 영향 범위를 명확히 예측 가능하도록 구조 개선 및 배포 자동화 달성
 
 ---
@@ -88,13 +88,9 @@ flowchart LR
 ## 5. Evidence & Benchmarks
 **테스트 커버리지 측정 결과 (JaCoCo)**
 
-| Module Layer | Coverage | Focus Area |
-| :--- | :--- | :--- |
-| **Core: Domain** | **60%** | 핵심 비즈니스 로직 및 유스케이스 검증 |
-| **Core: Data** | **45%** | Repository 및 데이터 매핑 로직 검증 |
-| **Feature (UI)** | - | UI/Interaction 테스트 제외 (효율성 고려) |
+![Test Coverage Report](./테스트%20커버리지2.png)
 
-> **Analysis**: 비즈니스 로직의 핵심인 **Model과 Repository 계층**을 중심으로 **60%의 테스트 커버리지**를 달성하였습니다. UI 레이어보다 데이터 무결성과 로직 검증에 집중하여 리팩토링 과정에서의 사이드 이펙트를 사전에 방지하고 안정성을 확보했습니다.
+> **Analysis**: 핵심 비즈니스 로직을 중심으로 **59%의 테스트 커버리지**를 달성하였습니다. UI 레이어보다 데이터 무결성과 로직 검증에 집중하여 리팩토링 과정에서의 사이드 이펙트를 사전에 방지하고 안정성을 확보했습니다.
 
 ---
 
