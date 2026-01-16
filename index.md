@@ -8,7 +8,7 @@ permalink: /
 
 안녕하세요, 안드로이드 개발자 황중현입니다.
 <div style="margin-top: 1rem; margin-bottom: 2rem;">
-    <a href="./이력서.pdf" class="btn-download" target="_blank">📄 이력서(PDF) 다운로드</a>
+    <a href="./%EC%9D%B4%EB%A0%A5%EC%84%9C.pdf" class="btn-download" download>📄 이력서(PDF) 다운로드</a>
 </div>
 
 주요 프로젝트 상세 기술서는 아래 링크에서 확인하실 수 있습니다.
