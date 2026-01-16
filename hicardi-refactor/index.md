@@ -28,10 +28,10 @@ metrics:
 ---
 
 ## 2. Background & Problem
-- 레거시(Java) 구조로 UI·도메인·데이터 계층의 책임 경계가 불명확
-- 모듈 간 의존성 관리가 느슨해지며 빌드 시간이 지속적으로 증가
-- 테스트 기반이 부족해 리팩토링 시 안정성을 보장하기 어려움
-- 수동 중심의 배포 프로세스로 배포 리드타임이 길고 예측이 어려움
+- **레거시(Java) 구조**: UI·도메인·데이터 계층의 책임 경계가 불명확
+- **모듈 간 의존성 관리 부재**: 느슨해진 의존성으로 빌드 시간이 지속적으로 증가
+- **테스트 기반 부족**: 리팩토링 시 안정성을 보장하기 어려움
+- **수동 배포 프로세스**: 배포 리드타임이 길고 예측이 어려움
 
 ---
 
@@ -41,6 +41,7 @@ metrics:
 - **Unidirectional Data Flow (UDF)**:
   - **How**: 사용자의 의도(Intent)를 `Sealed Interface`로 정의하고, Reducer를 통해 불변 상태(Immutable State)만 UI로 발행
   - **Why**: 의료 데이터 특성상 UI와 실제 데이터의 불일치가 치명적이므로, 상태 변경의 원천(Source of Truth)을 하나로 통제하여 사이드 이펙트를 차단
+
 - **UseCase Separation**:
   - **How**: 비즈니스 로직을 ViewModel에서 분리하여 순수 Kotlin 모듈(Domain Layer)로 격리, 안드로이드 의존성 제거
 
@@ -48,6 +49,7 @@ metrics:
 - **Multi-module Strategy**:
   - **How**: `feature`(화면), `core`(공통 로직), `domain`(비즈니스) 계층으로 모듈을 분리하고, `implementation` 의존성을 통해 컴파일 파이프라인 최적화
   - **Why**: 모놀리식 구조에서는 코드 한 줄 수정에도 전체 재빌드가 발생했으나, 모듈화를 통해 변경된 모듈만 빌드(Incremental Build)하여 생산성 극대화
+
 - **Convention Plugins (build-logic)**:
   - **How**: `buildSrc` 대신 `included build` 방식을 사용해 `AndroidHiltPlugin`, `JvmLibraryPlugin` 등 공통 설정을 플러그인화
   - **Why**: 10개 이상의 모듈에서 반복되는 Gradle 설정을 중앙화하여, 라이브러리 버전 관리 실수 방지 및 스크립트 가독성 향상

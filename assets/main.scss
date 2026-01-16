@@ -100,17 +100,20 @@ a { text-decoration: none; color: inherit; }
 }
 
 /* Content */
-.project-content {
+.project-body {
     h2 { margin-top: 2.5rem; font-size: 1.5rem; border-left: 4px solid #2c3e50; padding-left: 1rem; }
     h3 { margin-top: 1.5rem; font-size: 1.2rem; color: #2c3e50; }
     ul { padding-left: 1.2rem; }
-    li { margin-bottom: 0.5rem; }
+    li { margin-bottom: 0.8rem; }
+    p { margin-bottom: 1.2rem; }
     blockquote { background: #f1f3f5; border-left: 4px solid #ced4da; margin: 1.5rem 0; padding: 1rem; color: #495057; }
     code {
-        background-color: #f3f4f6;
-        color: #c7254e;
+        background-color: #e9ecef;
+        color: #d63384;
         padding: 0.2em 0.4em;
         border-radius: 4px;
+        font-weight: 600;
+        border: 1px solid #dee2e6;
         font-size: 0.9em;
         font-family: Consolas, Monaco, 'Andale Mono', monospace;
     }
