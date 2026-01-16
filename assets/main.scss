@@ -8,6 +8,8 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f9f9f9;
+    word-break: keep-all;
+    overflow-wrap: break-word;
 }
 
 a { text-decoration: none; color: inherit; }

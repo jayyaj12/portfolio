@@ -51,13 +51,13 @@ metrics:
   - **Why**: 모놀리식 구조에서는 코드 한 줄 수정에도 전체 재빌드가 발생했으나, 모듈화를 통해 변경된 모듈만 빌드(Incremental Build)하여 생산성 극대화
 
 - **Convention Plugins (build-logic)**:
-  - **How**: `buildSrc` 대신 `included build` 방식을 사용해 `AndroidHiltPlugin`, `JvmLibraryPlugin` 등 공통 설정을 플러그인화
-  - **Why**: 10개 이상의 모듈에서 반복되는 Gradle 설정을 중앙화하여, 라이브러리 버전 관리 실수 방지 및 스크립트 가독성 향상
+  - **How**: `buildSrc` 대신 `included build` 방식을 도입하여 `AndroidHiltPlugin`, `JvmLibraryPlugin` 등 반복되는 Gradle 설정을 플러그인으로 모듈화
+  - **Why**: 다수 모듈의 중복 설정을 중앙에서 관리함으로써 라이브러리 버전 불일치를 방지하고 빌드 스크립트 가독성 향상
 
 ### C. CI·CD: GitHub Actions
 - **Pipeline Optimization**:
-  - **How**: `Gradle Build Cache`와 `Docker Layer Caching`을 적용하여 중복 빌드 작업을 건너뛰도록 구성
-  - **Why**: 배포 시간을 30분에서 10분으로 단축하여, QA 피드백 루프를 하루 1회에서 4회 이상으로 늘림 (Business Agility 확보)
+  - **How**: `Gradle Build Cache` 및 `Docker Layer Caching`을 적용하여 중복되는 빌드 작업을 생략하도록 파이프라인 최적화
+  - **Why**: 배포 시간을 30분에서 10분으로 단축시킴으로써 QA 피드백 주기를 일 1회에서 4회 이상으로 증대 (Business Agility 확보)
 
 <div class="mermaid">
 flowchart LR
@@ -83,7 +83,7 @@ flowchart LR
 - **빌드 시간 78% 단축** (약 7m → 1.5m)
 - **배포 소요 시간 66% 감소** (약 30m → 10m)
 - **JUnit 기반 테스트 커버리지 60% 달성**
-- 리팩토링 이후 기능 추가 시 변경 영향 범위를 예측 가능하게 관리
+- 리팩토링 후 기능 추가 시 변경 영향 범위를 명확히 예측 가능하도록 구조 개선
 
 ---
 
@@ -101,7 +101,7 @@ flowchart LR
 ---
 
 ## 6. Deep Dive & Trade-offs
-- MVI 도입: 초기 학습 비용은 증가했으나, 장기적인 상태 관리 안정성을 우선
+- MVI 도입: 초기 학습 곡선은 높았으나, 장기적인 유지보수성과 상태 관리의 안정성을 우선시함
 - **순환 참조(Circular Dependency) 해결**:
-  - 레거시 코드를 모듈로 쪼개는 과정에서 발생한 상호 참조 문제를 해결하기 위해, 공통 로직을 추상화한 `core:model` 모듈을 신설하고 의존성 역전 원칙(DIP)을 적용해 구조를 풀어나감
-- **Trade-off**: 초기 설정 비용(Boilerplate)은 증가했으나, 팀원 증가 시 발생할 수 있는 코드 충돌 비용과 빌드 시간을 선제적으로 방어함
+  - 모듈 분리 중 발생한 상호 참조 문제를 해결하기 위해, 공통 로직을 `core:model`로 추상화하고 의존성 역전 원칙(DIP)을 적용하여 순환 참조 고리를 끊음
+- **Trade-off**: 초기 설정 비용(Boilerplate)은 증가했으나, 향후 팀 규모 확대 시 발생할 코드 충돌과 빌드 시간 증가 문제를 선제적으로 방어
