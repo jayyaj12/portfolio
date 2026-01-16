@@ -1,142 +1,115 @@
 ---
 ---
-
-/* ===== Custom white/blue tone ===== */
+/* Reset & Base */
 body {
-  background-color: #ffffff;
-  color: #1f2937;
-  font-size: 16px;
-  line-height: 1.65;
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
 }
 
-.value-icon {
-  width: 32px;
-  height: 32px;
-  margin-bottom: 14px;
-  display: block;
+a { text-decoration: none; color: inherit; }
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+    background-color: #fff;
+    min-height: 100vh;
+    box-shadow: 0 0 20px rgba(0,0,0,0.05);
 }
 
-.site-header {
-  border-top: 3px solid #2563eb;
-  border-bottom: 1px solid #e5e7eb;
-  background-color: #ffffff;
+/* Project Header */
+.project-header {
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #eee;
 }
 
-.site-title,
-.site-title:visited {
-  color: #1e3a8a;
-  font-weight: 700;
-}
-
-.site-nav .page-link {
-  color: #374151;
-  font-weight: 500;
-}
-
-.site-nav .page-link:hover {
-  color: #2563eb;
-}
-
-h1, h2, h3 {
-  color: #111827;
-  font-weight: 700;
-}
-
-h2 {
-  border-bottom: 2px solid #e5e7eb;
-  padding-bottom: 0.3em;
-  margin-top: 2.5em;
-}
-
-a {
-  color: #2563eb;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-ul li {
-  margin-bottom: 0.4em;
-}
-
-strong {
-  color: #1e40af;
-}
-
-.site-footer {
-  border-top: 1px solid #e5e7eb;
-  background-color: #f9fafb;
-  color: #6b7280;
-  font-size: 0.9em;
-}
-
-/* ===== Project Page ===== */
-.project-hero {
-  padding: 48px 0 24px;
-}
-
-.badge {
-  display: inline-block;
-  padding: 6px 10px;
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 600;
-  background: rgba(30, 90, 200, 0.10);
-  color: #1e5ac8;
-  margin-bottom: 12px;
+.back-link {
+    display: inline-block;
+    margin-bottom: 1rem;
+    color: #666;
+    font-size: 0.9rem;
+    &:hover { color: #000; text-decoration: underline; }
 }
 
 .project-title {
-  font-size: 40px;
-  line-height: 1.15;
-  margin: 0 0 10px;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    color: #111;
 }
 
 .project-subtitle {
-  margin: 0 0 14px;
-  font-size: 16px;
-  color: #4b5563;
+    font-size: 1.1rem;
+    color: #555;
+    margin: 0 0 1.5rem 0;
 }
 
 .project-meta {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 14px;
-  flex-wrap: wrap;
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 1rem;
+    .meta-item { margin-right: 1.5rem; }
 }
 
-.meta-item {
-  font-size: 13px;
-  color: #6b7280;
-  background: #f3f4f6;
-  padding: 6px 10px;
-  border-radius: 10px;
+/* Tags */
+.project-tags {
+    margin-bottom: 1.5rem;
+    .tag {
+        display: inline-block;
+        background: #f0f2f5;
+        color: #444;
+        padding: 0.2rem 0.6rem;
+        border-radius: 4px;
+        font-size: 0.85rem;
+        margin-right: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
 }
 
-.metric-row {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
-  margin-top: 18px;
+/* Metrics */
+.project-metrics {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
 }
 
-.project-body {
-  padding: 28px 0 60px;
+.metric-card {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    padding: 0.8rem 1.2rem;
+    border-radius: 8px;
+    text-align: center;
+    min-width: 100px;
+    
+    .metric-value {
+        display: block;
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #2c3e50;
+    }
+    .metric-label {
+        font-size: 0.8rem;
+        color: #6c757d;
+    }
 }
 
-.project-body h2 {
-  margin-top: 34px;
-  margin-bottom: 12px;
+/* Content */
+.project-content {
+    h2 { margin-top: 2.5rem; font-size: 1.5rem; border-left: 4px solid #2c3e50; padding-left: 1rem; }
+    h3 { margin-top: 1.5rem; font-size: 1.2rem; color: #2c3e50; }
+    ul { padding-left: 1.2rem; }
+    li { margin-bottom: 0.5rem; }
+    blockquote { background: #f1f3f5; border-left: 4px solid #ced4da; margin: 1.5rem 0; padding: 1rem; color: #495057; }
 }
 
-.project-body h3 {
-  margin-top: 20px;
-  margin-bottom: 10px;
-}
-
-@media (max-width: 860px) {
-  .project-title { font-size: 30px; }
-  .metric-row { grid-template-columns: 1fr; }
+.project-footer {
+    margin-top: 4rem;
+    text-align: center;
+    .btn-back { display: inline-block; padding: 0.8rem 2rem; background: #2c3e50; color: #fff; border-radius: 4px; transition: background 0.2s; &:hover { background: #1a252f; } }
 }
