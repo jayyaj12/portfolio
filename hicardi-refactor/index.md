@@ -1,7 +1,7 @@
 ---
 layout: project
 title: "Hicardi Android 앱 레거시 리팩토링 및 아키텍처 고도화"
-subtitle: "기존 Android 앱을 MVI/Clean Architecture · 멀티모듈로 리팩토링하고, build-logic/CI·CD로 배포 프로세스를 자동화하여 개발 생산성을 혁신한 사례"
+subtitle: "단일 모듈로 구성된 Android 앱을 MVI 패턴 기반 Clean Architecture의 멀티모듈 구조로 리팩토링하여 구조적 확장성을 확보하고, build-logic을 적용해 모듈 간 의존성 관리를 표준화했으며 CI/CD 파이프라인 구축으로 배포 과정을 자동화"
 period: "2025.09 – 2025.12"
 role: "Android Developer"
 featured: true
