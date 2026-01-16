@@ -40,10 +40,10 @@ metrics:
 
 <div class="mermaid">
 graph LR
-    Byte[1 Byte Packet]
-    Door[Door (2bit)]
-    Dir[Direction (2bit)]
-    Err[Error (4bit)]
+    Byte["1 Byte Packet"]
+    Door["Door (2bit)"]
+    Dir["Direction (2bit)"]
+    Err["Error (4bit)"]
     
     Byte --- Door
     Byte --- Dir
