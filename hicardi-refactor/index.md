@@ -50,6 +50,31 @@ metrics:
   - **How**: `feature`(화면), `core`(공통 로직), `domain`(비즈니스) 계층으로 모듈을 분리하고, `implementation` 의존성을 통해 컴파일 파이프라인 최적화
   - **Why**: 모놀리식 구조에서는 코드 한 줄 수정에도 전체 재빌드가 발생했으나, 모듈화를 통해 변경된 모듈만 빌드(Incremental Build)하여 생산성 극대화
 
+<div class="mermaid">
+graph TD
+    subgraph App Layer
+      app[":app"]
+    end
+    subgraph Feature Layer
+      home[":feature:home"]
+      setting[":feature:setting"]
+    end
+    subgraph Domain Layer
+      domain[":domain"]
+    end
+    subgraph Core Layer
+      core[":core"]
+    end
+
+    app --> home
+    app --> setting
+    home --> domain
+    setting --> domain
+    home --> core
+    setting --> core
+    domain --> core
+</div>
+
 - **Convention Plugins (build-logic)**:
   - **How**: `buildSrc` 대신 `included build` 방식을 도입하여 `AndroidHiltPlugin`, `JvmLibraryPlugin` 등 반복되는 Gradle 설정을 플러그인으로 모듈화
   - **Why**: 다수 모듈의 중복 설정을 중앙에서 관리함으로써 라이브러리 버전 불일치를 방지하고 빌드 스크립트 가독성 향상

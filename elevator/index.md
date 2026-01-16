@@ -38,6 +38,22 @@ metrics:
   - **How**: 1 Byte에 도어(Open/Close), 방향(Up/Down), 에러 등 다중 상태를 비트 단위로 패킹하고, `(byte & MASK)` 연산으로 상태 추출
   - **Why**: 고빈도 패킷 수신 환경에서 String/JSON 파싱으로 인한 메모리 할당(GC)과 연산 지연을 제거하기 위함
 
+<div class="mermaid">
+graph LR
+    Byte[1 Byte Packet]
+    Door[Door (2bit)]
+    Dir[Direction (2bit)]
+    Err[Error (4bit)]
+    
+    Byte --- Door
+    Byte --- Dir
+    Byte --- Err
+    
+    style Door fill:#f9f,stroke:#333,stroke-width:2px
+    style Dir fill:#bbf,stroke:#333,stroke-width:2px
+    style Err fill:#ff9,stroke:#333,stroke-width:2px
+</div>
+
 - **UDP Multicast**: 로컬 네트워크 내 다중 디바이스 제어를 위한 비동기 통신 구조 설계
 
 ### B. UI 렌더링 성능 개선
