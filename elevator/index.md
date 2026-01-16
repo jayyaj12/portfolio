@@ -3,7 +3,6 @@ layout: project
 title: "Android 기반 실시간 엘리베이터 제어 및 DID 시스템"
 subtitle: "레거시 Java 프로젝트를 Kotlin 기반의 MVVM, Clean Architecture로 재설계하고, 반응형 UI와 운영 자동화 시스템을 구축한 사례"
 period: "2023.06 – 2025.06"
-role: "Android Developer"
 featured: true
 tags:
   - Android

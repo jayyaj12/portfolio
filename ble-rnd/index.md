@@ -3,7 +3,7 @@ layout: project
 title: "BLE National R&D Project"
 subtitle: "BLE 연결/명령 신뢰성을 높이기 위한 검증·상태관리 설계를 적용한 사례"
 period: "2021.01 – 2023.12"
-featured: false
+featured: true
 tags:
   - Android
   - Kotlin
