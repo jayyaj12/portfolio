@@ -19,11 +19,11 @@ a { text-decoration: none; color: inherit; transition: color 0.2s; }
 
 /* Project List Links in Index */
 h3 a {
-    color: #2563eb;
+    color: #111;
     font-weight: 700;
     &:hover {
         text-decoration: underline;
-        color: #1d4ed8;
+        color: #000;
     }
     &::after {
         content: " 🔗";
@@ -150,11 +150,11 @@ h3 a {
 .btn-download {
     display: inline-block;
     padding: 0.6rem 1.2rem;
-    background-color: #2563eb;
+    background-color: #111;
     color: #fff;
     border-radius: 6px;
     font-weight: 600;
     font-size: 0.95rem;
     transition: background-color 0.2s;
-    &:hover { background-color: #1d4ed8; text-decoration: none; color: #fff; }
+    &:hover { background-color: #000; text-decoration: none; color: #fff; }
 }
