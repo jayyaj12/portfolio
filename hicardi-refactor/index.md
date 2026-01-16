@@ -1,7 +1,7 @@
 ---
 layout: project
 title: "Hicardi Android 앱 레거시 리팩토링 및 아키텍처 고도화"
-subtitle: "레거시 Java 기반 Android 앱을 Kotlin · MVI/Clean Architecture · 멀티모듈로 재설계하고, build-logic/CI·CD로 배포 프로세스를 자동화하고 테스트 환경을 구축한 사례"
+subtitle: "기존 Android 앱을 MVI/Clean Architecture · 멀티모듈로 리팩토링하고, build-logic/CI·CD로 배포 프로세스를 자동화하여 개발 생산성을 혁신한 사례"
 period: "2025.09 – 2025.12"
 role: "Android Developer"
 featured: true
@@ -22,7 +22,7 @@ metrics:
 ---
 
 ## 1. Project Overview
-초기 스타트업 단계에서 빠르게 개발된 단일 모듈(Monolithic) 구조로, 비즈니스 로직과 UI 코드가 뒤섞여 있어 유지보수가 한계에 다다른 상황이었습니다.  
+단일 모듈(Monolithic) 구조로, 비즈니스 로직과 UI 코드가 뒤섞여 있어 유지보수가 한계에 다다른 상황이었습니다.  
 테스트 코드 부재로 인해 수정 시마다 전체 수동 테스트가 강제되었고, **APK 추출부터 사내 배포 게시판 업로드까지 이어지는 반복적인 수동 배포 과정**이 개발 생산성을 심각하게 저해하고 있었습니다.
 
 ---
@@ -48,20 +48,6 @@ metrics:
 - **Multi-module Strategy**:
   - **How**: Google의 공식 레퍼런스인 'Now in Android' 아키텍처를 벤치마킹하여 `app` → `feature` → `core`의 3단계 계층 구조로 재편. 기능 단위는 `feature` 모듈로, 공통 비즈니스 로직과 데이터 모델은 `core` 모듈로 분리하여 응집도를 높임
   - **Why**: Google이 제시하는 검증된 모듈화 표준을 도입하여 아키텍처의 지속 가능성을 확보하고, 기능별 격리를 통해 증분 빌드(Incremental Build) 효율을 극대화하기 위함
-
-<div class="mermaid">
-graph TD
-    app[":app"]
-    feature[":feature"]
-    core[":core"]
-
-    app --> feature
-    feature --> core
-    
-    style app fill:#dbeafe,stroke:#2563eb,stroke-width:2px
-    style feature fill:#d1fae5,stroke:#059669,stroke-width:2px
-    style core fill:#f3f4f6,stroke:#4b5563,stroke-width:2px
-</div>
 
 - **Convention Plugins (build-logic)**:
   - **How**: `buildSrc` 대신 `included build` 방식을 도입하여 `AndroidHiltPlugin`, `JvmLibraryPlugin` 등 반복되는 Gradle 설정을 플러그인으로 모듈화
@@ -100,11 +86,15 @@ flowchart LR
 ---
 
 ## 5. Evidence & Benchmarks
-면접관님께 신뢰도 높은 데이터를 제공하기 위해 측정한 **테스트 커버리지 리포트**입니다.
+**테스트 커버리지 측정 결과 (JaCoCo)**
 
-![Test Coverage Report](./테스트%20커버리지.png)
+| Module Layer | Coverage | Focus Area |
+| :--- | :--- | :--- |
+| **Core: Domain** | **60%** | 핵심 비즈니스 로직 및 유스케이스 검증 |
+| **Core: Data** | **45%** | Repository 및 데이터 매핑 로직 검증 |
+| **Feature (UI)** | - | UI/Interaction 테스트 제외 (효율성 고려) |
 
-> **Analysis**: 핵심 도메인 로직(Domain Layer)을 중심으로 **60%의 커버리지**를 달성하였으며, 이를 통해 리팩토링 과정에서 발생할 수 있는 사이드 이펙트를 사전에 방지하고 안정성을 확보했습니다.
+> **Analysis**: 비즈니스 로직의 핵심인 **Model과 Repository 계층**을 중심으로 **60%의 테스트 커버리지**를 달성하였습니다. UI 레이어보다 데이터 무결성과 로직 검증에 집중하여 리팩토링 과정에서의 사이드 이펙트를 사전에 방지하고 안정성을 확보했습니다.
 
 ---
 
