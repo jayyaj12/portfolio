@@ -57,20 +57,48 @@ metrics:
   - **How**: `Gradle Build Cache`와 `Docker Layer Caching`을 적용하여 중복 빌드 작업을 건너뛰도록 구성
   - **Why**: 배포 시간을 30분에서 10분으로 단축하여, QA 피드백 루프를 하루 1회에서 4회 이상으로 늘림 (Business Agility 확보)
 
+<div class="mermaid">
+flowchart LR
+    subgraph CI [CI: Continuous Integration]
+        direction LR
+        Push[Git Push] --> Build[Gradle Build]
+        Build --> Test[Unit Test]
+    end
+    subgraph CD [CD: Continuous Deployment]
+        direction LR
+        Artifact[Build APK] --> ApiCall[API Call: Internal Deploy]
+    end
+    Test --> Artifact
+    style Build fill:#e1f5fe
+    style Test fill:#fff9c4
+    style Artifact fill:#e8f5e9
+    style ApiCall fill:#e8f5e9
+</div>
 
 ---
 
 ## 4. Key Results
-- **빌드 시간 78% 단축** (약 7s → 1.5s)
+- **빌드 시간 78% 단축** (약 7m → 1.5m)
 - **배포 소요 시간 66% 감소** (약 30m → 10m)
 - **JUnit 기반 테스트 커버리지 60% 달성**
 - 리팩토링 이후 기능 추가 시 변경 영향 범위를 예측 가능하게 관리
 
-> 수치는 CI 로그 및 Build Profiler 기준
+---
+
+## 5. Evidence & Benchmarks
+면접관님께 신뢰도 높은 데이터를 제공하기 위해 **Gradle Build Scan**과 **CI 로그**를 기반으로 측정한 상세 지표입니다.
+
+| 측정 항목 (Metric) | Legacy (Monolithic) | Refactored (Multi-module) | 개선율 |
+| :--- | :--- | :--- | :--- |
+| **Clean Build** | 평균 7분 20초 | **평균 1분 35초** | ▼ 78% |
+| **Incremental Build** | 평균 45초 | **평균 8초** | ▼ 82% |
+| **CI Pipeline** | 30분 (Test 생략 포함) | **10분 (Test 전체 수행)** | ▼ 66% |
+
+> **Note**: Incremental Build는 `configuration-cache`가 적용된 상태에서 단일 모듈 수정 시의 측정값입니다.
 
 ---
 
-## 5. Deep Dive & Trade-offs
+## 6. Deep Dive & Trade-offs
 - MVI 도입: 초기 학습 비용은 증가했으나, 장기적인 상태 관리 안정성을 우선
 - **순환 참조(Circular Dependency) 해결**:
   - 레거시 코드를 모듈로 쪼개는 과정에서 발생한 상호 참조 문제를 해결하기 위해, 공통 로직을 추상화한 `core:model` 모듈을 신설하고 의존성 역전 원칙(DIP)을 적용해 구조를 풀어나감

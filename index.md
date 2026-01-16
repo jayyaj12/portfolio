@@ -6,6 +6,10 @@ permalink: /
 
 # Portfolio
 
+<div style="margin-bottom: 2rem;">
+    <a href="./이력서.pdf" class="btn-download" target="_blank">📄 이력서(PDF) 다운로드</a>
+</div>
+
 안녕하세요, 안드로이드 개발자 황중현입니다.
 주요 프로젝트 상세 기술서는 아래 링크에서 확인하실 수 있습니다.
 
